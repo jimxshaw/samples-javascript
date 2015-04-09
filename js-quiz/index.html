@@ -1,9 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>JS Quiz</title>
+  <title>Simple JavaScript Quiz</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/script.js"></script>
 </head>
 <body>
+  <div id="container">
+    <header>
+      <h1>Simply JavaScript Quiz</h1>
+      <p>Test your knowledge on JavaScript <strong>fundamentals</strong></p>
+    </header>
 
+    <section>
+      <div id="results"></div>
+      <form name="quizForm" onsubmit="return submitAnswers()">
+        <h3>1. In which HTML element do we put in JavaScript code?</h3>
+        <input type="radio" name="q1" value="a" id="q1a"> a. &lt;link&gt;<br>
+        <input type="radio" name="q1" value="b" id="q1b"> b. &lt;input&gt;<br>
+        <input type="radio" name="q1" value="c" id="q1c"> c. &lt;script&gt;<br>
+        <input type="radio" name="q1" value="d" id="q1d"> d. &lt;section&gt;<br>
+
+        <h3>2. Functions must return a value.</h3>
+        <input type="radio" name="q2" value="a" id="q2a"> a. True<br>
+        <input type="radio" name="q2" value="b" id="q2b"> b. False<br>
+
+        <h3>3. How would one write "Hello" in an alert box?</h3>
+        <input type="radio" name="q3" value="a" id="q3a"> a. alert("Hello");<br>
+        <input type="radio" name="q3" value="b" id="q3b"> b. msg("Hello");<br>
+        <input type="radio" name="q3" value="c" id="q3c"> c. alertBox("Hello");<br>
+        <input type="radio" name="q3" value="d" id="q3d"> d. document.write("Hello");<br>
+
+        <h3>4. For "if/else" statements, the "else" portion is optional.</h3>
+        <input type="radio" name="q4" value="a" id="q4a"> a. True<br>
+        <input type="radio" name="q4" value="b" id="q4b"> b. False<br>
+
+        <h3>5. Which one is not considered a data type?</h3>
+        <input type="radio" name="q5" value="a" id="q5a"> a. Undefined<br>
+        <input type="radio" name="q5" value="b" id="q5b"> b. Object<br>
+        <input type="radio" name="q5" value="c" id="q5c"> c. Null<br>
+        <input type="radio" name="q5" value="d" id="q5d"> d. Array<br>
+
+        <br><br>
+
+        <input type="submit" value="Submit Answers">
+      </form>
+    </section>
+
+    <footer>
+      <p>Copyright &copy; 2015, All Rights Reserved</p>
+    </footer>
+  </div>
 </body>
 </html>
