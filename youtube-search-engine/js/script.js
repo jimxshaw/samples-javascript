@@ -24,7 +24,45 @@ $(function() {
       }, 400, function() {});
     }
   });
+
+  $('#search-form').submit(function(e) {
+    e.preventDefault();
+  });
 })
+
+function search() {
+  // Clear results
+  $('#results').html('');
+  $('#buttons').html('');
+
+  // Get form input
+  q = $('#query').val();
+
+  // Run GET request on API
+  $.get(
+    "https://www.googleapis.com/youtube/v3/search", {
+      part: 'snippet, id',
+      q: q,
+      type: 'video',
+      key: 'AIzaSyC8ow_45a6Evhl4PNCyQuNthA0zGrYCn_Y'
+    },
+    function(data) {
+      var nextPageToken = data.nextPageToken;
+      var prevPageToken = data.prevPageToken;
+
+      // Log data
+      console.log(data);
+
+      $.each(data.items, function(i, item) {
+        // Get output
+        var output = getOutput(item);
+
+        // Display results
+        $('#results').append(output);
+      });
+    }
+  );
+}
 
 
 
