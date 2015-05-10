@@ -1,3 +1,9 @@
+<?php include 'database.php'; ?>
+<?php
+	// Create Select Query
+	$query = "SELECT * FROM shouts ORDER BY id DESC";
+	$shouts = mysqli_query($con, $query);
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,7 +20,9 @@
 			</header>
 			<div id="shouts">
 				<ul>
-					<li></li>
+					<?php while($row = mysqli_fetch_assoc($shouts)) : ?>
+						<li><?php echo $row['name']; ?>: <?php echo $row['shout']; ?> [<?php echo $row['date']; ?>]</li>
+					<?php endwhile; ?>
 				</ul>
 			</div>
 			<footer>
