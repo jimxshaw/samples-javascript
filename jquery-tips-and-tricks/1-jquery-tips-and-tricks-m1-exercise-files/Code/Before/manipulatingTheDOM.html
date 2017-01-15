@@ -36,20 +36,28 @@
     <script src="Scripts/jquery.js"></script>
     <script>
         $("#loadCustomersButton").click(function () {
-            $("#customersTable tbody").html("");
+            var $tbody = $("#customersTable tbody");
+
+            $tbody.html("");
             var start = new Date();
             var custs = getCustomers();
+
+            var html = [];
+
             for (var i = 0; i < custs.length; i++) {
                 var cust = custs[i];
-                var tr = $("#customersTable tbody").append("<tr></tr>");
-                tr.append("<td>" + cust.id + "</td>");
-                tr.append("<td>" + cust.name + "</td>");
-                tr.append("<td>" + cust.address + "</td>");
-                tr.append("<td>" + cust.city + "</td>");
-                tr.append("<td>" + cust.state + "</td>");
-                tr.append("<td>" + cust.zip + "</td>");
-                tr.append("<td>" + cust.newCustomer + "</td>");
+                html.push("<tr>" +
+                "<td>" + cust.id + "</td>" +
+                "<td>" + cust.name + "</td>" +
+                "<td>" + cust.address + "</td>" +
+                "<td>" + cust.city + "</td>" +
+                "<td>" + cust.state + "</td>" +
+                "<td>" + cust.zip + "</td>" +
+                "<td>" + cust.newCustomer + "</td></tr>");
             }
+
+            $tbody.append(html.join(""));
+
             var diff = new Date().getTime() - start.getTime();
             $("#diff").html(diff);
         });
