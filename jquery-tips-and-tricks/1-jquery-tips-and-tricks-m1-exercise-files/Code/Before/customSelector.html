@@ -16,9 +16,24 @@
 
     <script>
 
+        $.extend($.expr[":"], {
+            hiddenPanel: function (panel) {
+                if (panel === null) {
+                    return false;
+                }
+
+                var $panel = $(panel);
+
+                return $panel.css("display") == "none" 
+                    || $panel.css("visibility") == "hidden" 
+                    || $panel.hasClass("hidden");
+            }
+        });
+
         $(document).ready(function () {
             $('#showPanelsButton').click(function () {
-
+                $("div:hiddenPanel").removeClass("hidden")
+                                    .css({ "display": "", "visibility": "" });
             });
         });
 
