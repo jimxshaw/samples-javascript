@@ -5,6 +5,18 @@
 
     },
 
+    getCustomers = function () {
+        return $.getJSON(urlBase);
+    },
+
+    updateCustomer = function (cust) {
+        return $.ajax({
+            url: urlBase + '/' + cust.ID,
+            data: cust,
+            type: 'PUT'
+        });
+    },
+
     getCustomer = function (id) {
         return $.getJSON(urlBase + '/' + id);
     },
@@ -33,6 +45,8 @@
     };
 
     return {
+        getCustomers: getCustomers,
+        updateCustomer: updateCustomer,
         authenticate: authenticate,
         getCustomer: getCustomer,
         getCustomerJSONP: getCustomerJSONP,

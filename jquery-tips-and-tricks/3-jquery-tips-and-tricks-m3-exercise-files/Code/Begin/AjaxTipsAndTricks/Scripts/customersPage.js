@@ -27,7 +27,7 @@
         },
 
     getCustomers = function () {
-        getCustomersData()
+        dataService.getCustomers()
             .done(function (custs) {
                 var custsHtml = "";
                 for (var i = 0; i < custs.length; i++) {
@@ -40,10 +40,6 @@
             });
     },
 
-    getCustomersData = function () {
-        return $.getJSON(urlBase);
-    },
-
     updateCustomer = function () {
         //Simulate customer data
         var cust = {
@@ -52,7 +48,7 @@
             LastName: "Smith"
         };
 
-        updateCustomerData(cust)
+        dataService.updateCustomer(cust)
             .done(function () {
                 updateStatus("Updated customers! Refreshing customer list.");
                 getCustomers();
@@ -60,14 +56,6 @@
             .fail(function (jqXHR, textStatus, err) {
                 alert(textStatus);
             });
-    },
-
-    updateCustomerData = function (cust) {
-        return $.ajax({
-            url: urlBase + '/' + cust.ID,
-            data: cust,
-            type: 'PUT'
-        });
     },
 
     insertCustomer = function () {
