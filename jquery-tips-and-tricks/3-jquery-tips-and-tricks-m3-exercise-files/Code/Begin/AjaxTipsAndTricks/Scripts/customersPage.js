@@ -1,58 +1,73 @@
 ﻿var customersPage = function () {
     var urlBase = "http://localhost:38129/api/customers",
         init = function () {
-        $("#GetCustomers").click(function () {
-            $.getJSON(urlBase, function (custs) {
-                var custsHtml = ""
+            $("#GetCustomers").click(function () {
+                getCustomers();
+            });
+
+            $("#UpdateCustomer").click(function () {
+                updateCustomer();
+            });
+
+            $("#InsertCustomer").click(function () {
+                insertCustomer();
+            });
+
+            $("#DeleteCustomer").click(function () {
+                deleteCustomer();
+            });
+
+            $("#GetCustomerOrders").click(function () {
+                getCustomerOrders(1);
+            });
+
+            $("#GetCustomerJSONP").click(function () {
+                getCustomerJSONP(1);
+            });
+        },
+
+    getCustomers = function () {
+        getCustomersData()
+            .done(function (custs) {
+                var custsHtml = "";
                 for (var i = 0; i < custs.length; i++) {
                     custsHtml += "<li>" + custs[i].FirstName + " " + custs[i].LastName + "&nbsp;</li>";
                 }
                 $("#CustomersContainer").html(custsHtml);
+            })
+            .fail(function () {
+                alert("Unable to get customers.");
             });
-        });
-
-        $("#UpdateCustomer").click(function () {
-            //Simulate customer data
-            var cust = {
-                ID: 2,
-                FirstName: "Michelle",
-                LastName: "Smith"
-            };
-
-            $.ajax({
-                url: urlBase + '/' + cust.ID,
-                data: cust,
-                type: 'PUT',
-                success: function () {
-                    updateStatus("Updated Customer! Refreshing customer list.");
-                    getCustomers();
-                }
-            });
-        });
-
-        $("#InsertCustomer").click(function () {
-            insertCustomer();
-        });
-
-        $("#DeleteCustomer").click(function () {
-            deleteCustomer();
-        });
-
-        $("#GetCustomerOrders").click(function () {
-            getCustomerOrders(1);
-        });
-
-        $("#GetCustomerJSONP").click(function () {
-            getCustomerJSONP(1);
-        });
     },
 
-    getCustomers = function () {
-
+    getCustomersData = function () {
+        return $.getJSON(urlBase);
     },
 
     updateCustomer = function () {
+        //Simulate customer data
+        var cust = {
+            ID: 2,
+            FirstName: "Michelle",
+            LastName: "Smith"
+        };
 
+        updateCustomerData(cust)
+            .done(function () {
+                updateStatus("Updated customers! Refreshing customer list.");
+                getCustomers();
+            })
+            .fail(function (jqXHR, textStatus, err) {
+                alert(textStatus);
+            });
+    },
+
+    updateCustomerData = function (cust) {
+        return $.ajax({
+            url: urlBase + '/' + cust.ID,
+            data: cust,
+            type: 'PUT'
+        });
     },
 
     insertCustomer = function () {
